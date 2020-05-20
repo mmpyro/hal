@@ -14,8 +14,6 @@ fi
 
 gcloud container clusters get-credentials ${ACCOUNT} --zone europe-west3-c --project ${PROJECT}
 kubectl config use-context 'gke_mmpyro-snadbox_europe-west3-c_mmk8s-cluster'
-TOKEN='7419db034d6e6f3cfd4041c5bad640b0d222e90c'
-echo ${TOKEN} > token
 
 kubectl apply -f ./account.yml
 hal config version edit --version 1.19.6
