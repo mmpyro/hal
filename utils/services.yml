@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: spin-deck-ingress
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+  namespace: spinnaker
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: spin-deck
+          servicePort: 9000
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: spin-gate-ingress
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+  namespace: spinnaker
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /spin-gate
+        backend:
+          serviceName: spin-gate
+          servicePort: 8084
+---
+
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: spin-gate-ingress
+  namespace: spinnaker
+route:
+  strip_path: true
